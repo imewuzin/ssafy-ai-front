@@ -14,5 +14,6 @@ export async function sendMessage(messages) {
         throw new Error(`Failed to send message: ${errorText}`);
       }
     
-      return response.text();
+    const data = await response.json();
+    return data.reply;
 }
