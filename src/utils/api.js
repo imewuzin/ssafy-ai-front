@@ -13,6 +13,5 @@ export async function sendMessage(messages) {
         throw new Error('Failed to send message');
     }
 
-    const data = await response.json();
-    return data.reply;
+    return response.text();
 }
