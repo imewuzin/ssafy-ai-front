@@ -35,19 +35,25 @@ export default function ChatArea({ sessionId }) {
         setIsLoading(true);
     
         const userMessage = {
-            sessionId,
             role: 'user',
             content: input,
-            timestamp: Date.now(),
         };
-    
-        await addMessage(userMessage);
-        setInput('');
-        await loadMessages();
     
         try {
             const chatHistory = await getMessages(sessionId);
-            const reply = await sendMessage(chatHistory);
+            const messageHistory = chatHistory.map(msg => ({
+                role: msg.role,
+                content: msg.content
+            }));
+            messageHistory.push(userMessage);
+    
+            const reply = await sendMessage(messageHistory);
+    
+            await addMessage({
+                sessionId,
+                ...userMessage,
+                timestamp: Date.now(),
+            });
     
             const aiMessage = {
                 sessionId,
@@ -58,6 +64,7 @@ export default function ChatArea({ sessionId }) {
     
             await addMessage(aiMessage);
             await loadMessages();
+            setInput('');
         } catch (error) {
             console.error('Error sending message:', error);
             const errorMessage = {
@@ -72,6 +79,7 @@ export default function ChatArea({ sessionId }) {
             setIsLoading(false);
         }
     }
+    
     
 
     if (!sessionId) {
