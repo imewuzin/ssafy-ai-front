@@ -91,13 +91,17 @@ export default function ChatArea({ sessionId }) {
     }
 
     return (
-        <div className="flex-1 flex flex-col p-4 overflow-hidden">
+        <div className="flex-1 flex flex-col p-4 bg-white">
             <div className="flex-1 overflow-y-auto mb-4">
                 {messages.map((message, index) => (
                     <div key={index} className="mb-4">
-                        <div className="font-semibold mb-1">{message.role === 'user' ? '사용자' : 'AI'}</div>
+                        <div className="font-semibold mb-1 text-[#1428A0]">
+                            {message.role === 'user' ? '사용자' : 'AI'}
+                        </div>
                         <div className={`p-3 rounded-lg shadow ${
-                            message.role === 'user' ? 'bg-white' : 'bg-gray-100'
+                            message.role === 'user' 
+                            ? 'bg-[#F8F9FA] border border-[#E9ECEF]' 
+                            : 'bg-[#E7F5FE] border border-[#D1E9FA]'
                         }`}>
                             {message.content}
                         </div>
@@ -109,7 +113,7 @@ export default function ChatArea({ sessionId }) {
                     </div>
                 )}
             </div>
-            <form onSubmit={handleSubmit} className="flex items-center bg-white rounded-lg shadow">
+            <form onSubmit={handleSubmit} className="flex items-center bg-white rounded-lg shadow border border-[#E9ECEF]">
                 <input
                     type="text"
                     value={input}
@@ -118,7 +122,7 @@ export default function ChatArea({ sessionId }) {
                     className="flex-1 p-3 rounded-lg focus:outline-none"
                     disabled={isLoading}
                 />
-                <button type="submit" className="p-3 text-gray-500 hover:text-gray-700" disabled={isLoading}>
+                <button type="submit" className="p-3 text-[#1428A0] hover:text-[#00B3E3]" disabled={isLoading}>
                     <Send className="w-5 h-5" />
                 </button>
             </form>

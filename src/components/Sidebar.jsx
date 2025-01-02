@@ -62,10 +62,10 @@ export default function Sidebar({
     }
 
     return (
-        <div className="w-64 bg-gray-900 text-white p-4 flex flex-col">
+        <div className="w-64 bg-[#DBF3FE] text-black p-4 flex flex-col">
             <button
                 onClick={handleNewChat}
-                className="flex items-center justify-center w-full py-3 px-3 mb-4 rounded-md text-sm bg-gray-700 hover:bg-gray-600 transition-colors"
+                className="flex items-center justify-center w-full py-3 px-3 mb-4 rounded-md text-sm bg-[#6dcef5] hover:bg-[#F0F0F0] text-black font-semibold transition-colors"
             >
                 <PlusCircle className="w-4 h-4 mr-2"/>
                 새 채팅
@@ -74,8 +74,8 @@ export default function Sidebar({
                 {chatSessions.map((session) => (
                     <div
                         key={session.id}
-                        className={`flex items-center justify-between py-2 px-3 rounded-md hover:bg-gray-700 cursor-pointer mb-2 ${
-                            session.id === currentSessionId ? 'bg-gray-700' : ''
+                        className={`flex items-center justify-between py-2 px-3 rounded-md hover:bg-[#C3E7F5] cursor-pointer mb-2 ${
+                            session.id === currentSessionId ? 'bg-[#C3E7F5]' : ''
                         }`}
                     >
                         <div
@@ -83,7 +83,7 @@ export default function Sidebar({
                             className="flex-1 overflow-hidden"
                         >
                             <div className="text-sm truncate">{session.title}</div>
-                            <div className="text-xs text-gray-400">
+                            <div className="text-xs text-black">
                                 {new Date(session.timestamp).toLocaleString()}
                             </div>
                         </div>
@@ -92,7 +92,7 @@ export default function Sidebar({
                                 e.stopPropagation();
                                 handleDeleteSession(session.id);
                             }}
-                            className="p-1 rounded-full hover:bg-gray-600"
+                            className="p-1 rounded-full hover:bg-[#C3E7F5]"
                         >
                             <X className="w-4 h-4"/>
                         </button>
@@ -101,7 +101,7 @@ export default function Sidebar({
             </div>
             <button
                 onClick={handleClearAllChats}
-                className="flex items-center justify-center w-full py-3 px-3 mt-4 rounded-md text-sm bg-red-600 hover:bg-red-700 transition-colors"
+                className="flex items-center justify-center w-full py-3 px-3 mt-4 rounded-md text-sm bg-[#1E94F6] hover:bg-[#0F1E6E] text-white font-semibold transition-colors"
             >
                 <Trash2 className="w-4 h-4 mr-2"/>
                 모든 채팅 삭제
