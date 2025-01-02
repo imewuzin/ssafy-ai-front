@@ -31,51 +31,49 @@ export default function ChatArea({ sessionId }) {
     async function handleSubmit(e) {
         e.preventDefault();
         if (!input.trim() || !sessionId || isLoading) return;
-    
+
         setIsLoading(true);
-    
+
         const userMessage = {
+            sessionId,
             role: 'user',
             content: input,
+            timestamp: Date.now(),
         };
-    
-        const updatedMessages = [...messages, userMessage];
-    
+
+        await addMessage(userMessage);
+        setInput('');
+        await loadMessages();
+
         try {
-            const reply = await sendMessage(updatedMessages);
-    
+            const messageContent = input; // 사용자 입력을 직접 전달
+
+            const reply = await sendMessage(input);
+
+
             const aiMessage = {
+                sessionId,
                 role: 'assistant',
                 content: reply,
+                timestamp: Date.now(),
             };
-    
-            updatedMessages.push(aiMessage);
-            setMessages(updatedMessages);
-    
-            await addMessage({
-                sessionId,
-                ...userMessage,
-                timestamp: Date.now(),
-            });
-            await addMessage({
-                sessionId,
-                ...aiMessage,
-                timestamp: Date.now(),
-            });
-    
-            setInput('');
+
+            await addMessage(aiMessage);
+            await loadMessages();
         } catch (error) {
             console.error('Error sending message:', error);
             const errorMessage = {
+                sessionId,
                 role: 'assistant',
                 content: `오류가 발생했습니다: ${error.message}`,
+                timestamp: Date.now(),
             };
-            setMessages([...updatedMessages, errorMessage]);
+            await addMessage(errorMessage);
+            await loadMessages();
         } finally {
             setIsLoading(false);
         }
     }
-    
 
     if (!sessionId) {
         return (
