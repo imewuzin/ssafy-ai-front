@@ -1,3 +1,5 @@
+const API_URL = import.meta.env.VITE_API_URL;
+
 export async function sendMessage(messages) {
     // 대화 컨텍스트를 구조화하고 최근 10개의 메시지만 포함
     const recentMessages = messages.slice(-10);
@@ -7,6 +9,8 @@ export async function sendMessage(messages) {
 
     const lastUserMessage = messages.filter(msg => msg.role === 'user').pop();
     const messageWithContext = `${context}\n사용자: ${lastUserMessage.content}\nAI:`;
+
+    
 
     const response = await fetch(API_URL + '/chat', {
         method: 'POST',
