@@ -46,9 +46,10 @@ export default function ChatArea({ sessionId }) {
         await loadMessages();
 
         try {
-            const messageContent = input; // 사용자 입력을 직접 전달
+            const chatHistory = await getMessages(sessionId);
+        const messageContents = chatHistory.map(msg => ({role: msg.role, content: msg.content}));
 
-            const reply = await sendMessage(messageContent);
+            const reply = await sendMessage(messageContents);
 
             const aiMessage = {
                 sessionId,
