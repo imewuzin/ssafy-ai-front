@@ -3,7 +3,7 @@ import Sidebar from './components/Sidebar'
 import ChatArea from './components/ChatArea'
 import Header from './components/Header'
 import './App.css'
-import ssafyLogo from './assets/ssafy-logo.png'
+import ssafyLogo from './assets/logo.png'
 
 function App() {
     const [currentSessionId, setCurrentSessionId] = useState('')
