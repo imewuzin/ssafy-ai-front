@@ -31,33 +31,31 @@ export default function ChatArea({ sessionId }) {
     async function handleSubmit(e) {
         e.preventDefault();
         if (!input.trim() || !sessionId || isLoading) return;
-
+    
         setIsLoading(true);
-
+    
         const userMessage = {
             sessionId,
             role: 'user',
             content: input,
             timestamp: Date.now(),
         };
-
+    
         await addMessage(userMessage);
         setInput('');
         await loadMessages();
-
+    
         try {
             const chatHistory = await getMessages(sessionId);
-        const messageContents = chatHistory.map(msg => ({role: msg.role, content: msg.content}));
-
-            const reply = await sendMessage(messageContents);
-
+            const reply = await sendMessage(chatHistory);
+    
             const aiMessage = {
                 sessionId,
                 role: 'assistant',
                 content: reply,
                 timestamp: Date.now(),
             };
-
+    
             await addMessage(aiMessage);
             await loadMessages();
         } catch (error) {
@@ -74,6 +72,7 @@ export default function ChatArea({ sessionId }) {
             setIsLoading(false);
         }
     }
+    
 
     if (!sessionId) {
         return (
