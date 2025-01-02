@@ -64,7 +64,7 @@ export default function ChatArea({ sessionId }) {
             const errorMessage = {
                 sessionId,
                 role: 'assistant',
-                content: '죄송합니다. 오류가 발생했습니다. 다시 시도해 주세요.',
+                content: `오류가 발생했습니다: ${error.message}`,
                 timestamp: Date.now(),
             };
             await addMessage(errorMessage);

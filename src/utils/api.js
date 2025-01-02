@@ -10,8 +10,9 @@ export async function sendMessage(messages) {
     });
 
     if (!response.ok) {
-        throw new Error('Failed to send message');
-    }
-
-    return response.text();
+        const errorText = await response.text();
+        throw new Error(`Failed to send message: ${errorText}`);
+      }
+    
+      return response.text();
 }
