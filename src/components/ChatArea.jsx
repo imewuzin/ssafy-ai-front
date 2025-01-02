@@ -48,7 +48,8 @@ export default function ChatArea({ sessionId }) {
         try {
             const messageContent = input; // 사용자 입력을 직접 전달
 
-            const reply = await sendMessage(messageContent);
+            const reply = await sendMessage(input);
+
 
             const aiMessage = {
                 sessionId,

@@ -6,7 +6,7 @@ export async function sendMessage(messages) {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ messages }),
+        body: JSON.stringify({ message: message }),
     });
 
     if (!response.ok) {
