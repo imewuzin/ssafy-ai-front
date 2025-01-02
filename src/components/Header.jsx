@@ -15,7 +15,7 @@ export default function Header() {
     return (
         <header className="bg-white shadow-sm p-4 flex items-center justify-between">
             <div className="flex items-center">
-                <h1 className="text-xl font-semibold">금융용어 및 금융상품 챗봇</h1>
+                <h1 className="text-xl font-semibold">SSAFinancial</h1>
             </div>
             <button className="rounded-full hover:bg-gray-200 transition-colors"
                     onClick={openModal}>

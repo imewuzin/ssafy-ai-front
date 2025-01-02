@@ -6,6 +6,8 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  --ssafy-blue: #1428A0;
+  --ssafy-light-blue: #00B3E3;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -13,8 +15,24 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-
 body {
   margin: 0;
   padding: 0;
+  background-color: #f0f4f8;
+}
+
+.ssafy-bg {
+  background-color: var(--ssafy-blue);
+}
+
+.ssafy-text {
+  color: var(--ssafy-blue);
+}
+
+.ssafy-light-bg {
+  background-color: var(--ssafy-light-blue);
+}
+
+.ssafy-light-text {
+  color: var(--ssafy-light-blue);
 }
